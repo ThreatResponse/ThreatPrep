@@ -144,7 +144,7 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 ### IAM Policy
 
-The following policy can be used to run ThreatPrep. It is a reduced version of the ReadOnlyAccess policy (arn:aws:iam::aws:policy/ReadOnlyAccess), though it could probably be tailored down a bit more.
+The following policy can be used to run ThreatPrep. It is a reduced version of the ReadOnlyAccess policy (arn:aws:iam::aws:policy/ReadOnlyAccess). 
 
 ```
 {
@@ -152,40 +152,22 @@ The following policy can be used to run ThreatPrep. It is a reduced version of t
     "Statement": [
         {
             "Effect": "Allow",
-            "Action": "ec2:Describe*",
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": "elasticloadbalancing:Describe*",
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
             "Action": [
-                "autoscaling:Describe*",
-                "cloudwatch:ListMetrics",
-                "cloudwatch:Get*",
-                "cloudwatch:GetMetricStatistics",
-                "cloudwatch:List*",
-                "cloudwatch:Describe*",
-                "logs:Get*",
-                "logs:Describe*",
-                "logs:TestMetricFilter",
                 "cloudtrail:DescribeTrails",
                 "cloudtrail:GetTrailStatus",
-                "cloudtrail:ListTags",
+                "cloudwatch:DescribeAlarms",
+                "ec2:DescribeRegions",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeFlowLogs",
                 "iam:GenerateCredentialReport",
-                "iam:Get*",
-                "iam:List*"
-            ],
-            "Resource": "*"
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:Get*",
-                "s3:List*"
+                "iam:GetCredentialReport",
+                "iam:ListRoles",
+                "iam:ListAttachedUserPolicies",
+                "s3:GetBucketVersioning",
+                "s3:GetBucketLogging",
+                "s3:GetBucketAcl",
+                "s3:ListAllMyBuckets",
+                "s3:ListBucket"
             ],
             "Resource": "*"
         }
