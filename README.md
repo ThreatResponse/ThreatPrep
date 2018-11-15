@@ -2,7 +2,7 @@
 Configuration and Preparedness Auditing for AWS Accounts
 
 ## Installing
-You can use pip to install the awsthreatprep module from this git repository by using the command.
+You can use `pip` to install the `awsthreatprep` module from this git repository by using the command:
 
 ```
 pip install git+git://github.com/ThreatResponse/ThreatPrep@master
@@ -11,7 +11,7 @@ pip install git+git://github.com/ThreatResponse/ThreatPrep@master
 ### Installation example with docker
 Below we show a working installation procedure in a minimized [python docker container](https://hub.docker.com/_/python/).
 
-```
+```sh
 $ docker run -it -e AWS_ACCESS_KEY_ID=AWSACCESSKEYHERE -e AWS_SECRET_ACCESS_KEY=AWSSECRETACCESSKEYHERE python:2 bash
 
 root@3009:/# pip install git+git://github.com/ThreatResponse/ThreatPrep@master
@@ -84,7 +84,7 @@ root@3009:/# head -n 30 output.json
 
 ## Import from module
 
-```
+```python
 from awsthreatprep.checker import Checker
 c = Checker()
 ```
@@ -92,7 +92,7 @@ c = Checker()
 
 ## How to use
 
-```
+```sh
 root@3009a5bc9817:/# python
 Python 2.7.12 (default, Aug 26 2016, 20:43:47)
 [GCC 4.9.2] on linux2
@@ -144,9 +144,9 @@ Type "help", "copyright", "credits" or "license" for more information.
 ```
 ### IAM Policy
 
-The following policy can be used to run ThreatPrep. It is a reduced version of the ReadOnlyAccess policy (arn:aws:iam::aws:policy/ReadOnlyAccess). 
+The following policy can be used to run ThreatPrep. It is a reduced version of the ReadOnlyAccess policy (arn:aws:iam::aws:policy/ReadOnlyAccess).
 
-```
+```json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -177,8 +177,14 @@ The following policy can be used to run ThreatPrep. It is a reduced version of t
 
 ### Organization of results
 
-After running the `run_checks` method, the results are organized in the `results_dict` property of the Checker object. There are four keys in the `results_dict` dictionary: `S3`, `IAM`, `CloudWatch`, `VPC`, `CloudTrail`. Each of these keys represents an AWS service or feature where checks are run.
+After running the `run_checks` method, the results are organized in the `results_dict` property of the `Checker`
+object. There are four keys in the `results_dict` dictionary: `S3`, `IAM`, `CloudWatch`, `VPC`, and `CloudTrail`. Each
+of these keys represents an AWS service or feature where checks are run.
 
-These groups are further broken down into two more categories: `generals` or `collections`. If a check is a general check, it is looking for something that is not specific to a particular resource, such as determining if any CloudTrail trails exist. If a check is a collections check, it is running (usually multiple) checks on a single resource.  
+These groups are further broken down into two more categories: `generals` or `collections`. If a check is a general
+check, it is looking for something that is not specific to a particular resource, such as determining if any CloudTrail
+trails exist. If a check is a collections check, it is running (usually multiple) checks on a single resource.
 
-In the example above, the S3 bucket `threatpreptest45` is the resource being checked by the `S3CheckCollection`, the first result in the `S3` group of `collections` checks. The status of a `CheckCollection` is `PASS` if all of the subchecks are `PASS`, otherwise, it is `FAIL`.
+In the example above, the S3 bucket `threatpreptest45` is the resource being checked by the `S3CheckCollection`, the
+first result in the `S3` group of `collections` checks. The status of a `CheckCollection` is `PASS` if all of the
+subchecks are `PASS`, otherwise, it is `FAIL`.
